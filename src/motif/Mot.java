@@ -88,7 +88,16 @@ public class Mot {
    *@return        L'indice ou on a trouve le motif, -1 si pas trouve.
    */
   public int indiceMotifNaif(Mot motif) {
-    // A COMPLETER : QUESTION 1
+
+	 int textLen = this.length();
+	 int motifLen = motif.length();
+
+	 for (int i = 0; i <= textLen - motifLen; i += 1){
+		 if (motif.estFacteurDe(this, i)){
+			 return i;
+		 }
+	 }
+	 
     return -1 ;
   }
   
