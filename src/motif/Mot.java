@@ -111,7 +111,20 @@ public class Mot {
    *@return        L'indice ou on a trouve le motif, -1 si pas trouve.
    */
   public int indiceMotifAutomate(Mot motif) {
-    // A COMPLETER : QUESTION 2
+    if (motif.length() == 0){
+    	return 0;
+    }
+    else {
+    	AutomateMotif autoMotif = new AutomateMotif(motif);
+    	int state = autoMotif.etatInitial();
+    	for (int i = 0; i < this.length(); i++) {
+			state = autoMotif.transition(state, this.toString().charAt(i));
+			if (state == autoMotif.etatFinal()){
+				return i + 1 - motif.length();
+			}
+		}
+    	
+    }
      return -1 ;
   } 
   
