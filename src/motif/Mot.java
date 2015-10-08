@@ -117,7 +117,7 @@ public class Mot {
     else {
     	AutomateMotif autoMotif = new AutomateMotif(motif);
     	int state = autoMotif.etatInitial();
-    	for (int i = 0; i < this.length(); i++) {
+    	for (int i = 0; i < this.length() - 1; i++) {
 			state = autoMotif.transition(state, this.toString().charAt(i));
 			if (state == autoMotif.etatFinal()){
 				return i + 1 - motif.length();
