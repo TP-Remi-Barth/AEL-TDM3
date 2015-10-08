@@ -37,8 +37,24 @@ public class MotTest {
 	}
 
 	@Test
-	public void testIndiceMotifKMP() {
-		fail("Not yet implemented");
-	}
+	public void testIndiceMotifKMP() {		
+		Mot text = new Mot("le fermier est dans sa ferme et son fils 46 mange du caca");
+		Mot motifPrefix = new Mot("le");
+		Mot motifInterieur = new Mot("sa ferme");
+		Mot motifSuffix = new Mot("du caca");
+		
+		Mot motifInexistant = new Mot("sdqsj osqdeaz ezae");
+		Mot motifQuiCommenceBien = new Mot("dans sa ferme et sa fille");
+		Mot motifDerniereLettreIncorrect = new Mot("dans sa ferma");
+		Mot motifTropGrand = new Mot("le fermier est dans sa ferme et son fils 46 mange du cacas");
 
+		assertEquals(text.indiceMotifKMP(motifPrefix), 0);
+		assertEquals(text.indiceMotifKMP(motifInterieur), 20);
+		assertEquals(text.indiceMotifKMP(motifSuffix), 50);
+
+		assertEquals(text.indiceMotifKMP(motifInexistant), -1);
+		assertEquals(text.indiceMotifKMP(motifQuiCommenceBien), -1);
+		assertEquals(text.indiceMotifKMP(motifDerniereLettreIncorrect), -1);
+		assertEquals(text.indiceMotifKMP(motifTropGrand), -1);
+	}
 }
