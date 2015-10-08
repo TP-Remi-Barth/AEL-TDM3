@@ -21,7 +21,7 @@ public class Mot {
    *@param  m  La chaine de caracteres qui constitue le Mot
    */
   public Mot(String m) {
-    this.m = m;
+	  this.m = m;
   }
   
   /**
@@ -136,13 +136,46 @@ public class Mot {
    *@return        L'indice ou on a trouve le motif, -1 si pas trouve.
    */ 
   public int indiceMotifKMP(Mot motif){
-    // A COMPLETER : QUESTION 4
-     return -1 ;
+	  if (motif.length() == 0){
+		  return 0;
+	  }
+	  else {
+		  int[] pref = this.calculerFonctionPrefixe(motif);
+		  int q = 0;
+		  for (int i = 0; i < this.length(); i += 1){
+			  while (q > 0 && motif.m.charAt(q) != this.m.charAt(i)){
+				  q = pref[q]; 
+			  }
+			  if (motif.m.charAt(q) == this.m.charAt(i)){
+				  q += 1;
+			  }
+			  if (q == motif.length()){
+				  return i - motif.length() + 1;
+			  }
+		  }
+	  }
+	  return -1 ;
   }
   
+  /* La convention d'appel de cette methode n'a aucun sens, mais bon... */
   private int[] calculerFonctionPrefixe(Mot motif){
-    // A COMPLETER : QUESTION 3
-     return null;
+	  int[] pref = new int[motif.length()+1];
+	  int k = 0;
+	  
+	  pref[0] = 0;
+	  pref[1] = 0;
+	  
+	  for (int q = 2; q <= motif.length(); q += 1){
+		  while (k > 0 && motif.m.charAt(k) != motif.m.charAt(q-1)){
+			  k = pref[k];
+		  }
+		  if (motif.m.charAt(k) == motif.m.charAt(q-1)){
+			  k += 1;
+		  }
+		  pref[q] = k;
+	  }
+
+	  return pref;
   } 
   
   /**
@@ -153,6 +186,7 @@ public class Mot {
   public static void main(String args[]){
     Mot mot = new Mot(args[0]) ;
     System.out.println("indice : "+ mot.indiceMotifKMP(new Mot(args[1]))) ;
+  
   }
 
 }
