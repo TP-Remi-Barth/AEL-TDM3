@@ -32,24 +32,24 @@ public class MotTest {
 	@Test
 	public void testIndiceMotifAutomate() {
 		
-		Mot text = new Mot("le fermier est dans sa ferme et son fils 46 mange du caca");
+		Mot text = new Mot("lefermierestdanssafermeetsonfils");
 		Mot motifPrefix = new Mot("le");
-		Mot motifInterieur = new Mot("sa ferme");
-		Mot motifSuffix = new Mot("du caca");
+		Mot motifInterieur = new Mot("saferme");
+		Mot motifSuffix = new Mot("fils");
 		
-		Mot motifInexistant = new Mot("sdqsj osqdeaz ezae");
-		Mot motifQuiCommenceBien = new Mot("dans sa ferme et sa fille");
-		Mot motifDerniereLettreIncorrect = new Mot("dans sa ferma");
-		Mot motifTropGrand = new Mot("le fermier est dans sa ferme et son fils 46 mange du cacas");
+		Mot motifInexistant = new Mot("sdqsjosqdeazezae");
+		Mot motifQuiCommenceBien = new Mot("danssafermeetsafill");
+		Mot motifDerniereLettreIncorrect = new Mot("danssaferma");
+		Mot motifTropGrand = new Mot("lefermierestdanssafermeetsonfilsmangeducaca");
 
 		assertEquals(text.indiceMotifAutomate(motifPrefix), 0);
-		assertEquals(text.indiceMotifAutomate(motifInterieur), 20);
-		assertEquals(text.indiceMotifNaif(motifSuffix), 50);
+		assertEquals(text.indiceMotifAutomate(motifInterieur), 16);
+		assertEquals(text.indiceMotifAutomate(motifSuffix), 28);
 
-		assertEquals(text.indiceMotifNaif(motifInexistant), -1);
-		assertEquals(text.indiceMotifNaif(motifQuiCommenceBien), -1);
-		assertEquals(text.indiceMotifNaif(motifDerniereLettreIncorrect), -1);
-		assertEquals(text.indiceMotifNaif(motifTropGrand), -1);
+		assertEquals(text.indiceMotifAutomate(motifInexistant), -1);
+		assertEquals(text.indiceMotifAutomate(motifQuiCommenceBien), -1);
+		assertEquals(text.indiceMotifAutomate(motifDerniereLettreIncorrect), -1);
+		assertEquals(text.indiceMotifAutomate(motifTropGrand), -1);
 	}
 	@Test
 	public void testIndiceMotifKMP() {		
